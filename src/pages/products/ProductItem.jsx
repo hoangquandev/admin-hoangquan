@@ -1,10 +1,11 @@
 import React from 'react';
 
-const ProductItem = ({ product, onEdit, onDelete }) => {
+const ProductItem = ({ product, onEdit, onDelete, index }) => {
     const { name, description, price, status } = product;
 
     return (
         <tr>
+            <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{index}</td>
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{name}</td>
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{description}</td>
             <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">{price}</td>

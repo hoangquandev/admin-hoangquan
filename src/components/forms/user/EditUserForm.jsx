@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { updateUserByAdmin } from '../../../api/user';
 
 const EditUserForm = ({ initialValues, id, onChange }) => {
+    console.log(initialValues);
     const formik = useFormik({
         initialValues: initialValues,
         validationSchema: Yup.object({

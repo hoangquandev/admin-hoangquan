@@ -23,7 +23,9 @@ export const logoutUser = async () => {
     return response.data
 }
 
-//quên mật khẩu data={email}
+//quên mật khẩu data={email,url}  
+//lưu ý url là route dẫn tới page reset-password
+// ví dụ http://localhost:3000/reset-password/:id thì url:http://localhost:3000/reset-password
 export const forgotPassword = async (data) => {
     const response = await API.post('/auth/forgot-password', data)
     return response.data

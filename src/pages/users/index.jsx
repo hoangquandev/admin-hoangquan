@@ -5,6 +5,7 @@ import { deleteUserByAdmin, getAllUsers } from '../../api/user';
 import EditUserForm from '../../components/forms/user/EditUserForm';
 import * as XLSX from 'xlsx';
 import Pagination from '../../components/pagination';
+import usePagination from '../../hooks/usePagination';
 
 const Users = () => {
     const [addPopup, setAddPopup] = useState(false);
@@ -13,14 +14,7 @@ const Users = () => {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [change, setChange] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [usersPerPage] = useState(10);
-
-    const indexOfLastUser = currentPage * usersPerPage;
-    const indexOfFirstUser = indexOfLastUser - usersPerPage;
-    const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
-
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+    const { currentItems, currentPage, itemsPerPage, paginate } = usePagination(users);
 
     useEffect(() => {
         const fetchUserList = async () => {
@@ -39,7 +33,7 @@ const Users = () => {
         };
 
         fetchUserList();
-    }, [change]);
+    }, [change, currentPage]);
 
     const getFileName = () => {
         const today = new Date();
@@ -112,13 +106,13 @@ const Users = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {currentUsers.map((user, index) => (
-                                <UserItem key={index} user={user} index={index + 1 + (currentPage - 1) * usersPerPage} onEdit={() => handleClickEditPopup(user)} onDelete={() => handleDeleteUser(user._id)} />
+                            {currentItems.map((user, index) => (
+                                <UserItem key={index} user={user} index={index + 1 + (currentPage - 1) * itemsPerPage} onEdit={() => handleClickEditPopup(user)} onDelete={() => handleDeleteUser(user._id)} />
                             ))}
                         </tbody>
                     </table>
                 </div>
-                <Pagination usersPerPage={usersPerPage} totalUsers={users.length} paginate={paginate} currentPage={currentPage} />
+                <Pagination itemsPerPage={itemsPerPage} totalItems={users.length} paginate={paginate} currentPage={currentPage} />
             </div>
             {addPopup && <div onClick={handleClosePopup} className='fixed top-0 left-0 w-screen h-screen bg-slate-600 bg-opacity-80 flex justify-center items-center'>
                 <RegisterForm onChange={() => setChange(!change)} />

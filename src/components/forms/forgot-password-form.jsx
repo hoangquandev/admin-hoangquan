@@ -2,16 +2,21 @@ import React from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { forgotPassword } from '../../api/auth';
+// import { useLocation } from 'react-router-dom';
 
 const ForgotPasswordForm = () => {
+
     const formik = useFormik({
         initialValues: {
             email: '',
+            url: window.location.origin + '/reset-password'
         },
         validationSchema: Yup.object({
             email: Yup.string().email('Địa chỉ email không hợp lệ').required('Bắt buộc'),
+            url: Yup.string().required()
         }),
         onSubmit: async values => {
+            // console.log(values);
             try {
                 const response = await forgotPassword(values);
                 console.log(response)
