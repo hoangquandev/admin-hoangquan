@@ -6,7 +6,7 @@ import { clearUser } from '../redux/reducers/userReducer';
 
 // Tạo một API mới của Axios
 const API = axios.create({
-    baseURL: 'http://localhost:8000', // Thay đổi thành URL của API của bạn
+    baseURL: 'https://api-hoangquan.onrender.com',
 });
 
 API.interceptors.request.use(
