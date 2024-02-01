@@ -27,7 +27,7 @@ API.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config
-        if (error.response?.status === 401 && !originalRequest._retry && store.getState().auth.refreshToken) {
+        if (error.response.status === 401 && !originalRequest._retry && store.getState().auth.refreshToken) {
             originalRequest._retry = true
             try {
                 const refreshToken = store.getState().auth.refreshToken
@@ -36,7 +36,7 @@ API.interceptors.response.use(
                 return API(originalRequest)
             } catch (error) {
                 // handle resfresh error, logout user
-                const response = await logoutUser()
+                // const response = await logoutUser()
                 store.dispatch(clearTokens())
                 store.dispatch(clearUser())
             }

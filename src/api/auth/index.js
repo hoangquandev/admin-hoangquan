@@ -19,7 +19,7 @@ export const refresh = async (data) => {
 
 // đăng xuất
 export const logoutUser = async () => {
-    const response = await API.post('/auth/logout')
+    // const response = await API.post('/auth/logout')
     return response.data
 }
 

@@ -4,6 +4,7 @@ const Menus = [
     { title: "Dashboard", path: "/" },
     { title: "Products", path: "/products" },
     { title: "Users", path: "/users" },
+    { title: "Orders", path: "/orders" },
 ];
 
 const Sidebar = () => {

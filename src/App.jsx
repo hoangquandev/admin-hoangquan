@@ -8,6 +8,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
 import { Suspense, lazy } from 'react'
 import Profile from './pages/users/Profile'
+import Orders from './pages/orders'
 
 //product
 const Products = lazy(() => import('./pages/products'))
@@ -24,6 +25,7 @@ function App() {
               <Route path='users' element={<Users />} />
               <Route path='users/profile' element={<Profile />} />
               <Route path='products' element={<Products />} />
+              <Route path='orders' element={<Orders />} />
             </Route>
             <Route path='/login' element={<Login />} />
             <Route path='/forgot-password' element={<ForgotPassword />} />
